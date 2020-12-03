@@ -37,7 +37,13 @@ namespace Day03
 
         public int CheckSlope(Point dir)
         {
-            return Iterate(new Point(0, 0), p => p + dir).TakeWhile(p => p.Y < Trees.Count).Count(p => Trees[p.Y][p.X % Width]);
+            Point start = new Point(0, 0);
+
+            Point move(Point pos) => pos + dir;
+            bool withinBounds(Point pos) => pos.Y < Trees.Count;
+            bool hasTree(Point pos) => Trees[pos.Y][pos.X % Width];
+
+            return Iterate(start, move).TakeWhile(withinBounds).Count(hasTree);
         }
     }
 
