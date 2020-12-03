@@ -15,8 +15,18 @@ namespace Day03
         public static Point operator +(Point a, Point b) => new Point(a.X + b.X, a.Y + b.Y);
     }
 
-class Program
+    class Program
     {
+        public static IEnumerable<T> Iterate<T>(T initial, Func<T, T> f)
+        {
+            T current = initial;
+            while (true)
+            {
+                yield return current;
+                current = f(current);
+            }
+        }
+
         static void Main(string[] args)
         {
             List<List<bool>> trees = File.ReadLines("../../../input.txt").Select(s => s.ToCharArray().Select(c => c == '#').ToList()).ToList();
@@ -36,19 +46,9 @@ class Program
 
         private static int CheckSlope(List<List<bool>> trees, Point dir)
         {
+            
             int width = trees[0].Count;
-            Point pos = new Point(0, 0);
-            int count = 0;
-            while (pos.Y < trees.Count)
-            {
-                if (trees[pos.Y][pos.X % width])
-                {
-                    count++;
-                }
-                pos = pos + dir;
-            }
-
-            return count;
+            return Iterate(new Point(0, 0), p => p + dir).TakeWhile(p => p.Y < trees.Count).Count(p => trees[p.Y][p.X % width]);
         }
     }
 }
