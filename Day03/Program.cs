@@ -15,7 +15,7 @@ namespace Day03
         public static Point operator +(Point a, Point b) => new Point(a.X + b.X, a.Y + b.Y);
     }
 
-    class Program
+    public class Terrain
     {
         public static IEnumerable<T> Iterate<T>(T initial, Func<T, T> f)
         {
@@ -27,10 +27,26 @@ namespace Day03
             }
         }
 
+        private List<List<bool>> Trees;
+        private int Width;
+        public Terrain(IEnumerable<string> lines)
+        {
+            Trees = lines.Select(s => s.ToCharArray().Select(c => c == '#').ToList()).ToList();
+            Width = Trees[0].Count;
+        }
+
+        public int CheckSlope(Point dir)
+        {
+            return Iterate(new Point(0, 0), p => p + dir).TakeWhile(p => p.Y < Trees.Count).Count(p => Trees[p.Y][p.X % Width]);
+        }
+    }
+
+    class Program
+    {
         static void Main(string[] args)
         {
-            List<List<bool>> trees = File.ReadLines("../../../input.txt").Select(s => s.ToCharArray().Select(c => c == '#').ToList()).ToList();
-            int count = CheckSlope(trees, new Point(3, 1));
+            Terrain terrain = new Terrain(File.ReadLines("../../../input.txt"));
+            int count = terrain.CheckSlope(new Point(3, 1));
             Console.WriteLine(count);
 
             List<Point> directions = new List<Point>() {
@@ -41,14 +57,8 @@ namespace Day03
                 new Point(1, 2)
             };
 
-            Console.WriteLine(directions.Select<Point, long>(dir => CheckSlope(trees, dir)).Aggregate((a, b) => a * b));
+            Console.WriteLine(directions.Select<Point, long>(dir => terrain.CheckSlope(dir)).Aggregate((a, b) => a * b));
         }
 
-        private static int CheckSlope(List<List<bool>> trees, Point dir)
-        {
-            
-            int width = trees[0].Count;
-            return Iterate(new Point(0, 0), p => p + dir).TakeWhile(p => p.Y < trees.Count).Count(p => trees[p.Y][p.X % width]);
-        }
     }
 }
