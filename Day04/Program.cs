@@ -2,38 +2,22 @@
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using Common;
 
 namespace Day04
 {
     class Program
     {
-        static List<Dictionary<string, string>> Parse(IEnumerable<string> lines)
+        static Dictionary<string, string> ParsePassport(IEnumerable<string> lines)
         {
-            List<Dictionary<string, string>> passports = new List<Dictionary<string, string>>();
-
-            Dictionary<string, string> passport = new Dictionary<string, string>();
-
-            foreach (var line in lines)
-            {
-                if (Regex.IsMatch(line, @"^\s*$")) {
-                    passports.Add(passport);
-                    passport = new Dictionary<string, string>();
-                }
-                else
+            return lines
+                .SelectMany(line => line.Split(' '))
+                .Select(entry =>
                 {
-                    var entries = Regex.Matches(line, @"(\S+:\S+)").Select(m => m.Value);
-                    foreach (var entry in entries) {
-                        var fieldAndValue = entry.Split(':', 2);
-                        passport.Add(fieldAndValue[0], fieldAndValue[1]);
-                    }
-                }
-            }
-            if (passport.Count > 0)
-            {
-                passports.Add(passport);
-            }
-            return passports;
+                    var fieldAndValue = entry.Split(':', 2);
+                    return new KeyValuePair<string, string>(fieldAndValue[0], fieldAndValue[1]);
+                })
+                .ToDictionary();
         }
 
         static readonly List<string> RequiredFields = new List<string>() {
@@ -47,7 +31,7 @@ namespace Day04
 
         static void Main(string[] args)
         {
-            List<Dictionary<string, string>> passports = Parse(File.ReadLines("../../../input.txt"));
+            IEnumerable<Dictionary<string, string>> passports = File.ReadLines("../../../input.txt").Paragraphs().Select(ParsePassport);
             Console.WriteLine(passports.Count(IsValidPassport));
         }
     }
