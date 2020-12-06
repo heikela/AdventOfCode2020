@@ -10,13 +10,13 @@ namespace Day06
     {
         static void Main(string[] args)
         {
-            IEnumerable<List<string>> grouped = File.ReadLines("../../../input.txt").Paragraphs();
-            int result = grouped
+            IEnumerable<List<string>> groups = File.ReadLines("../../../input.txt").Paragraphs();
+            int result = groups
                 .Select(g => string.Concat(g).ToHashSet().Count)
                 .Sum();
             Console.WriteLine(result);
 
-            int result2 = grouped
+            int result2 = groups
                 .Select(g => g.Select(s => s.ToHashSet()).Aggregate((a, b) => { a.IntersectWith(b); return a; }).Count)
                 .Sum();
             Console.WriteLine(result2);
