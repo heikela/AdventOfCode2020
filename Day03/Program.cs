@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using static Common.Utils;
 
 namespace Day03
 {
@@ -17,16 +18,6 @@ namespace Day03
 
     public class Terrain
     {
-        public static IEnumerable<T> Iterate<T>(T initial, Func<T, T> f)
-        {
-            T current = initial;
-            while (true)
-            {
-                yield return current;
-                current = f(current);
-            }
-        }
-
         private List<List<bool>> Trees;
         private int Width;
         public Terrain(IEnumerable<string> lines)
