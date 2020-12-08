@@ -5,17 +5,22 @@ using System.Collections.Generic;
 
 namespace Day08
 {
+    public record ProgramResult
+    {
+        public int Acc;
+        public bool Success;
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
             List<string> program = File.ReadLines("../../../input.txt").ToList();
-            int result = RunProgram(program);
-            Console.WriteLine(result);
+            Console.WriteLine(RunProgram(program).Acc);
             IEnumerable<List<string>> variations = Enumerable.Range(0, program.Count).SelectMany(i => MutateProgram(i, program));
-            IEnumerable<int> results = variations.SelectMany(RunProgram2);
+            IEnumerable<ProgramResult> results = variations.Select(RunProgram);
 
-            Console.WriteLine(results.First());
+            Console.WriteLine(results.First(r => r.Success).Acc);
         }
 
         private static IEnumerable<List<string>> MutateProgram(int i, List<string> source)
@@ -37,34 +42,7 @@ namespace Day08
             }
         }
 
-        private static int RunProgram(List<string> program)
-        {
-            HashSet<int> visited = new HashSet<int>();
-            int pc = 0;
-            int acc = 0;
-            while (!visited.Contains(pc))
-            {
-                visited.Add(pc);
-                string instruction = program[pc];
-                int arg = int.Parse(instruction.Substring(4));
-                switch (instruction.Substring(0, 3))
-                {
-                    case "jmp":
-                        pc += arg;
-                        break;
-                    case "acc":
-                        acc += arg;
-                        pc++;
-                        break;
-                    case "nop":
-                        pc++;
-                        break;
-                }
-            }
-
-            return acc;
-        }
-        private static IEnumerable<int> RunProgram2(List<string> program)
+        private static ProgramResult RunProgram(List<string> program)
         {
             HashSet<int> visited = new HashSet<int>();
             int pc = 0;
@@ -89,13 +67,11 @@ namespace Day08
                 }
             }
 
-            if (pc == program.Count) {
-                yield return acc;
-                yield break;
-            }
-            else {
-                yield break;
-            }
+            return new ProgramResult()
+            {
+                Acc = acc,
+                Success = pc == program.Count
+            };
         }
     }
 }
