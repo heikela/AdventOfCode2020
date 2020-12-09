@@ -30,6 +30,26 @@ namespace Day04
             return RequiredFields.All(field => document.ContainsKey(field));
         }
 
+        static bool CheckNumber(string number, int min, int max)
+        {
+            Match match = Regex.Match(number, @"^(\d+)$");
+            if (!match.Success)
+            {
+                return false;
+            }
+            int val = int.Parse(match.Groups[1].Value);
+            if (val < min | val > max)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        static string Right(string s, int n)
+        {
+            return s.Substring(s.Length - n);
+        }
+
         static bool IsValidPassport(Dictionary<string, string> document)
         {
             if (!PassportHasRequiredFields(document))
@@ -41,28 +61,62 @@ namespace Day04
                 switch (kv.Key)
                 {
                     case "byr":
-                        var match = Regex.Match(kv.Value, @"^(\d+)$");
-                        if (!match.Success)
-                        {
-                            return false;
-                        }
-                        int val = int.Parse(match.Groups[1].Value);
-                        if (val < 1920 | val > 2002)
-                        {
+                        if (!CheckNumber(kv.Value, 1920, 2002)) {
                             return false;
                         }
                         break;
                     case "iyr":
+                        if (!CheckNumber(kv.Value, 2010, 2020))
+                        {
+                            return false;
+                        }
                         break;
                     case "eyr":
+                        if (!CheckNumber(kv.Value, 2020, 2030))
+                        {
+                            return false;
+                        }
                         break;
                     case "hgt":
-                        break;
-                    case "hcl":
+                        Match heightMatch = Regex.Match(kv.Value, @"([0-9]+)(\w+)");
+                        if (!heightMatch.Success)
+                        {
+                            return false;
+                        }
+                        string unit = heightMatch.Groups[2].Value;
+                        string value = heightMatch.Groups[1].Value;
+                        if (unit == "cm") {
+                            if (!CheckNumber(value, 150, 193)) {
+                                return false;
+                            }
+                        }
+                        else if (unit == "in") {
+                            if (!CheckNumber(value, 59, 76)) {
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
                         break;
                     case "ecl":
+                        if (!Regex.IsMatch(kv.Value, @"^amb|blu|brn|gry|grn|hzl|oth$"))
+                        {
+                            return false;
+                        }
+                        break;
+                    case "hcl":
+                        if (!Regex.IsMatch(kv.Value, @"^#[0-9a-f]{6}$"))
+                        {
+                            return false;
+                        }
                         break;
                     case "pid":
+                        if (!Regex.IsMatch(kv.Value, @"^[0-9]{9}$"))
+                        {
+                            return false;
+                        }
                         break;
                     default: break;
                 }
