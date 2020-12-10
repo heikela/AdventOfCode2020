@@ -65,6 +65,18 @@ namespace Common
             return keyValuePairs.ToDictionary(kv => kv.Key, kv => kv.Value);
         }
 
+        public static TVal GetOrElse<TKey, TVal>(this Dictionary<TKey, TVal> dict, TKey key, TVal ifNotFound)
+        {
+            if (dict.TryGetValue(key, out TVal result))
+            {
+                return result;
+            }
+            else
+            {
+                return ifNotFound;
+            }
+        }
+
 
     }
 }

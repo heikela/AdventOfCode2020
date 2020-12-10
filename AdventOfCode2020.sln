@@ -17,17 +17,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day06", "Day06\Day06.csproj
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common", "Common\Common.shproj", "{D0DFDA8F-1FEF-4A35-B597-F7E1B1E17917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day08", "Day08\Day08.csproj", "{92CE34B8-13BB-47D4-93D6-DFE3C7322DCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day08", "Day08\Day08.csproj", "{92CE34B8-13BB-47D4-93D6-DFE3C7322DCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day09", "Day09\Day09.csproj", "{B35AED84-FFC8-4D09-B40A-E3F67968A106}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day09", "Day09\Day09.csproj", "{B35AED84-FFC8-4D09-B40A-E3F67968A106}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day07", "Day07\Day07.csproj", "{DB99CBF2-5790-4004-8870-5158A80A5E89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day07", "Day07\Day07.csproj", "{DB99CBF2-5790-4004-8870-5158A80A5E89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day10", "Day10\Day10.csproj", "{C75E9C2F-718A-46B0-AF8E-44E005B3C5FE}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Common\Common.projitems*{2ad74d93-ad43-435f-8971-5ced8fd553c2}*SharedItemsImports = 5
+		Common\Common.projitems*{c75e9c2f-718a-46b0-af8e-44e005b3c5fe}*SharedItemsImports = 5
 		Common\Common.projitems*{cfc2a389-cacf-4b29-bde9-37c25a903040}*SharedItemsImports = 5
 		Common\Common.projitems*{d0dfda8f-1fef-4a35-b597-f7e1b1e17917}*SharedItemsImports = 13
+		Common\Common.projitems*{db99cbf2-5790-4004-8870-5158a80a5e89}*SharedItemsImports = 5
 		Common\Common.projitems*{ef9f187e-c165-49a2-bc8e-2c9f8710ed32}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +75,10 @@ Global
 		{DB99CBF2-5790-4004-8870-5158A80A5E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB99CBF2-5790-4004-8870-5158A80A5E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB99CBF2-5790-4004-8870-5158A80A5E89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C75E9C2F-718A-46B0-AF8E-44E005B3C5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C75E9C2F-718A-46B0-AF8E-44E005B3C5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C75E9C2F-718A-46B0-AF8E-44E005B3C5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C75E9C2F-718A-46B0-AF8E-44E005B3C5FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
