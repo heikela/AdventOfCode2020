@@ -55,7 +55,7 @@ namespace Day11
 
         static Char ApplyRule(Point pos, Dictionary<Point, Char> old)
         {
-            int occupiedNeighbours = Directions().Count(dir => old.GetOrElse(pos + new Point(dx, dy), '.') == '#');
+            int occupiedNeighbours = Directions().Count(dir => old.GetOrElse(pos + dir, '.') == '#');
             switch (old[pos])
             {
                 case '.': return '.';
@@ -83,25 +83,9 @@ namespace Day11
 
         static Char ApplyRule2(Point pos, Dictionary<Point, Char> old)
         {
-            int occupiedNeighbours = 0;
-            for (int dx = -1; dx < 2; ++dx)
-            {
-                for (int dy = -1; dy < 2; ++dy)
-                {
-                    if (dx == 0 && dy == 0)
-                    {
-                        continue;
-                    }
-                    Point dir = new Point(dx, dy);
-                    Char neighbour = old.GetOrElse(
-                        Utils.Iterate(pos + dir, pos => pos + dir).SkipWhile(pos => old.ContainsKey(pos) && old[pos] == '.').First(),
-                        '.');
-                    if (neighbour == '#')
-                    {
-                        ++occupiedNeighbours;
-                    }
-                }
-            }
+            int occupiedNeighbours = Directions()
+                .Select(dir => Utils.Iterate(pos + dir, pos => pos + dir).SkipWhile(pos => old.ContainsKey(pos) && old[pos] == '.').First())
+                .Count(pos => old.GetOrElse(pos, '.') == '#');
             switch (old[pos])
             {
                 case '.': return '.';
