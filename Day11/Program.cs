@@ -79,20 +79,68 @@ namespace Day11
             }
         }
 
+        static Char ApplyRule2(Point pos, Dictionary<Point, Char> old)
+        {
+            int occupiedNeighbours = 0;
+            for (int dx = -1; dx < 2; ++dx)
+            {
+                for (int dy = -1; dy < 2; ++dy)
+                {
+                    if (dx == 0 && dy == 0)
+                    {
+                        continue;
+                    }
+                    Point dir = new Point(dx, dy);
+                    Char neighbour = old.GetOrElse(
+                        Utils.Iterate(pos + dir, pos => pos + dir).SkipWhile(pos => old.ContainsKey(pos) && old[pos] == '.').First(),
+                        '.');
+                    if (neighbour == '#')
+                    {
+                        ++occupiedNeighbours;
+                    }
+                }
+            }
+            switch (old[pos])
+            {
+                case '.': return '.';
+                case 'L':
+                    if (occupiedNeighbours == 0)
+                    {
+                        return '#';
+                    }
+                    else
+                    {
+                        return 'L';
+                    }
+                case '#':
+                    if (occupiedNeighbours >= 5)
+                    {
+                        return 'L';
+                    }
+                    else
+                    {
+                        return '#';
+                    }
+                default: return '.';
+            }
+        }
+
         static void Main(string[] args)
         {
-            Dictionary<Point, Char> current = new Dictionary<Point, char>();
+            Dictionary<Point, Char> start = new Dictionary<Point, char>();
             int y = 0;
             foreach (string line in File.ReadLines("../../../input.txt"))
             {
                 int x = 0;
                 foreach (Char c in line)
                 {
-                    current.Add(new Point(x, y), c);
+                    start.Add(new Point(x, y), c);
                     ++x;
                 }
                 ++y;
             }
+
+            Dictionary<Point, Char> current = start.ToDictionary();
 
             Dictionary<Point, Char> old;
             do
@@ -106,6 +154,22 @@ namespace Day11
             } while (!IsSame(current, old));
 
             Console.WriteLine(current.Values.Count(c => c == '#'));
+
+            // part 2
+            current = start.ToDictionary();
+
+            do
+            {
+                old = current;
+                current = new Dictionary<Point, char>();
+                foreach (var pos in old.Keys)
+                {
+                    current.Add(pos, ApplyRule2(pos, old));
+                }
+            } while (!IsSame(current, old));
+
+            Console.WriteLine(current.Values.Count(c => c == '#'));
+
         }
     }
 }
