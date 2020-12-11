@@ -37,9 +37,8 @@ namespace Day11
             return true;
         }
 
-        static Char ApplyRule(Point pos, Dictionary<Point, Char> old)
+        static IEnumerable<Point> Directions()
         {
-            int occupiedNeighbours = 0;
             for (int dx = -1; dx < 2; ++dx)
             {
                 for (int dy = -1; dy < 2; ++dy)
@@ -48,12 +47,15 @@ namespace Day11
                     {
                         continue;
                     }
-                    if (old.GetOrElse(pos + new Point(dx, dy), '.') == '#')
-                    {
-                        ++occupiedNeighbours;
-                    }
+                    yield return new Point(dx, dy);
                 }
             }
+            yield break;
+        }
+
+        static Char ApplyRule(Point pos, Dictionary<Point, Char> old)
+        {
+            int occupiedNeighbours = Directions().Count(dir => old.GetOrElse(pos + new Point(dx, dy), '.') == '#');
             switch (old[pos])
             {
                 case '.': return '.';
