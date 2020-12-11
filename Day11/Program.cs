@@ -20,21 +20,7 @@ namespace Day11
     {
         static bool IsSame(Dictionary<Point, Char> a, Dictionary<Point, Char> b)
         {
-            foreach (var kv in a)
-            {
-                if (!b.Contains(kv))
-                {
-                    return false;
-                }
-            }
-            foreach (var kv in b)
-            {
-                if (!a.Contains(kv))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return a.All(kv => b.Contains(kv)) && b.All(kv => a.Contains(kv));
         }
 
         static IEnumerable<Point> Directions()
