@@ -77,6 +77,15 @@ namespace Common
             }
         }
 
+        public static IEnumerable<KeyValuePair<int, T>> ZipWithIndex<T>(this IEnumerable<T> src)
+        {
+            int i = 0;
+            foreach (T e in src)
+            {
+                yield return KeyValuePair.Create(i++, e);
+            }
+            yield break;
+        }
 
     }
 }
