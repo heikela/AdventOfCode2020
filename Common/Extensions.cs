@@ -87,5 +87,10 @@ namespace Common
             yield break;
         }
 
+        public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> src)
+        {
+            return src.SelectMany(part => part);
+        }
+
     }
 }
