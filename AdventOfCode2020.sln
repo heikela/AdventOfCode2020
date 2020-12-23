@@ -27,13 +27,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day10", "Day10\Day10.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day11", "Day11\Day11.csproj", "{FF3F4FB4-6B4A-44D5-AD17-E5609B85A24B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day12", "Day12\Day12.csproj", "{7BFE020E-C5E5-4EA9-8BA6-C3D3BA9A201A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day12", "Day12\Day12.csproj", "{7BFE020E-C5E5-4EA9-8BA6-C3D3BA9A201A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day13", "Day13\Day13.csproj", "{B0586824-43A1-4E47-AF98-50971DD8841D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day13", "Day13\Day13.csproj", "{B0586824-43A1-4E47-AF98-50971DD8841D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day21", "Day21\Day21.csproj", "{45DAB475-14CF-4E5C-8DCD-5BACD63547FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day22", "Day22\Day22.csproj", "{5956B090-F6CF-452B-8A09-81425EB39036}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day22", "Day22\Day22.csproj", "{5956B090-F6CF-452B-8A09-81425EB39036}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day23", "Day23\Day23.csproj", "{C3AF05CB-1CB7-4B37-8ADE-9D4AAD625B23}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -41,6 +43,7 @@ Global
 		Common\Common.projitems*{45dab475-14cf-4e5c-8dcd-5bacd63547fc}*SharedItemsImports = 5
 		Common\Common.projitems*{5956b090-f6cf-452b-8a09-81425eb39036}*SharedItemsImports = 5
 		Common\Common.projitems*{b0586824-43a1-4e47-af98-50971dd8841d}*SharedItemsImports = 5
+		Common\Common.projitems*{c3af05cb-1cb7-4b37-8ade-9d4aad625b23}*SharedItemsImports = 5
 		Common\Common.projitems*{c75e9c2f-718a-46b0-af8e-44e005b3c5fe}*SharedItemsImports = 5
 		Common\Common.projitems*{cfc2a389-cacf-4b29-bde9-37c25a903040}*SharedItemsImports = 5
 		Common\Common.projitems*{d0dfda8f-1fef-4a35-b597-f7e1b1e17917}*SharedItemsImports = 13
@@ -113,6 +116,10 @@ Global
 		{5956B090-F6CF-452B-8A09-81425EB39036}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5956B090-F6CF-452B-8A09-81425EB39036}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5956B090-F6CF-452B-8A09-81425EB39036}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3AF05CB-1CB7-4B37-8ADE-9D4AAD625B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3AF05CB-1CB7-4B37-8ADE-9D4AAD625B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3AF05CB-1CB7-4B37-8ADE-9D4AAD625B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3AF05CB-1CB7-4B37-8ADE-9D4AAD625B23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
